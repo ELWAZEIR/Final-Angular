@@ -4,14 +4,20 @@ import jwt from 'jsonwebtoken'
 
 import validator from 'validator'
 const userSchema=new Schema({
-    userName:{
+    firstName:{
         type: String,
         required: [true, 'Please tell us your name!'],
         trim:true,
         minlength:3,
-        minlength:30
+        minlength:30,
       },
-    
+    lastName:{
+      type: String,
+        required: [true, 'Please tell us your name!'],
+        trim:true,
+        minlength:3,
+        minlength:30
+    },
     age:{
         type:Number,
         min:7
@@ -66,14 +72,12 @@ const userSchema=new Schema({
         type:Boolean,
         default:true,
     },
-    passwordChangedAt:{
-        type:Date
-    },
+   
     role:{
         type:String,
         enum:['admin','client'],
         default:"client",
-    },
+    },//email
     isConfirm:{
       type:Boolean,
       default:false
@@ -94,12 +98,7 @@ userSchema.pre('save', async function(next) {
     next();
   });
   
-  userSchema.pre('save', function(next) {
-    if (!this.isModified('password') || this.isNew) return next();
-  
-    this.passwordChangedAt = Date.now() - 1000;
-    next();
-  });
+ 
  
   userSchema.pre(/^find/, function(next) {
     // this points to the current query
