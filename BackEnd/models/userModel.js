@@ -4,20 +4,20 @@ import jwt from 'jsonwebtoken'
 
 import validator from 'validator'
 const userSchema=new Schema({
-    firstName:{
+    fullName:{
         type: String,
         required: [true, 'Please tell us your name!'],
         trim:true,
         minlength:3,
-        minlength:30,
+        maxlength:30,
       },
-    lastName:{
-      type: String,
-        required: [true, 'Please tell us your name!'],
-        trim:true,
-        minlength:3,
-        minlength:30
-    },
+    // lastName:{
+    //   type: String,
+    //     required: [true, 'Please tell us your name!'],
+    //     trim:true,
+    //     minlength:3,
+    //     minlength:30
+    // },
     age:{
         type:Number,
         min:7
@@ -41,21 +41,21 @@ const userSchema=new Schema({
         type: String,
         required: [true, 'Please provide a password'],
         minlength: 12,
-        maxlength:50,
+        maxlength:200,
         select:false,
         trim:true,
       },
-      passwordConfirm:{
-        type: String,
-        required: [true, 'Please confirm a password'],
-        minlength: 12,
-        maxlength:50,
-        trim:true,
-        // validate:function(e){
-        //   return e===this.password
-        // },
-        // Message:"passwordes are not the same"
-      },
+      // passwordConfirm:{
+      //   type: String,
+      //   required: [true, 'Please confirm a password'],
+      //   minlength: 12,
+      //   maxlength:50,
+      //   trim:true,
+      //   // validate:function(e){
+      //   //   return e===this.password
+      //   // },
+      //   // Message:"passwordes are not the same"
+      // },
     gender:{   
          type: String,
         enum: ['male', 'female'],
@@ -63,26 +63,30 @@ const userSchema=new Schema({
         required: [true, 'Please tell us your gender'],
         trim:true,}
         ,
-    phone:{
-        type:String,
-        minlength:9,
-        maxlength:50,
-    required:[true,"please"]},
-    isLoggedin:{
-        type:Boolean,
-        default:true,
-    },
-   
+    // phone:{
+    //     type:String,
+    //     minlength:9,
+    //     maxlength:50,
+    // required:[true,"please"]},
+    // isLoggedin:{
+    //     type:Boolean,
+    //     default:true,
+    // },
+   myCart:[{
+    type:mongoose.Schema.ObjectId,
+    ref:'Product',
+  
+   }],
     role:{
         type:String,
         enum:['admin','client'],
         default:"client",
     },//email
-    isConfirm:{
-      type:Boolean,
-      default:false
-    }
-
+    // isConfirm:{
+    //   type:Boolean,
+    //   default:false
+    // }
+   
 },{
   timestamps:true
 ,toJSON:{virtuals:true}
@@ -94,7 +98,7 @@ userSchema.pre('save', async function(next) {
     
     this.password = await bcrypt.hash(this.password, 8);//8=salt bcrypt
     // Delete passwordConfirm field
-    this.passwordConfirm = undefined;
+    // this.passwordConfirm = undefined;
     next();
   });
   
@@ -109,8 +113,19 @@ userSchema.pre('save', async function(next) {
     return await bcrypt.compare(passwordCurrent, userPassword);
   };
   //generate token to registed user
-  userSchema.methods.genAuthToken=  function(){
-    return  jwt.sign({ email: this.email},"ThePassword")//this.toJson()
-  }
+  // userSchema.methods.genAuthToken=  function(){
+  //   return  jwt.sign({ email: this.email},"ThePassword")//this.toJson()
+  // }
+  userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+    if (this.passwordChangedAt) {
+      const changedTimestamp = parseInt(
+        this.passwordChangedAt.getTime() / 1000,
+        10
+      );
+      return JWTTimestamp < changedTimestamp;
+    }
+    // False means NOT changed
+    return false;
+  };
   
 export const User=model("User",userSchema)
