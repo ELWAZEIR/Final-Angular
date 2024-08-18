@@ -18,7 +18,7 @@ import {
 import { createOneRate } from "../controllers/ratingController.js";
 const router=express.Router()
 // router.use(fileUpload())
-
+//http://localhost:3000/products?page=1&limit=10
 router
     .route('/')
     .get(getAllProducts)

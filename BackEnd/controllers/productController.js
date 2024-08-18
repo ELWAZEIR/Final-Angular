@@ -6,45 +6,23 @@ import multer from "multer";
 import { deleteOne } from "./factory.js";
 
 
-// Multer configuration
-/*work with react file
-var storage = multer.diskStorage(
-    {
-        destination: './uploads',
-        // filename: function (req, file, cb ) {
-        //     cb( null, file.originalname);
-        // }
-        filename: (req, file, cb) => {
-            
-            cb(null, 'iti'+file.fieldname +Date.now() +"-"+ file.originalname)
-          },
-    }
-);
-function fileFilter(req, file, cb) {
-    let ext = path.extname(file.originalname);
-    if (![".jpg", ".jpeg", ".png", ".jfif", ".gif",".pjpeg",".svg",".webp",".pjp"].includes(ext)) {
-        cb(new Error("File type is not supported"), false);
-        return;
-    }
-    cb(null, true);}
-const upload = multer({ storage: storage ,fileFilter} )*/
 
- 
+
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        // Specify the folder to store uploaded files
         cb(null, './uploads');
     },
     filename: (req, file, cb) => {
         // Specify the filename for the uploaded file
-        console.log(req.file.path)
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        //console.log(req.file?.path)
+        cb(null, 'ng'+ '-' + file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
 
 // File filter to allow only specific file types
 const fileFilter = (req, file, cb) => {
-    const fileTypes = /jpeg|jpg|png|gif/;
+    const fileTypes = /jpeg|jpg|png|gif|jfjf|webp|svg/;
     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = fileTypes.test(file.mimetype);
 
@@ -56,58 +34,58 @@ const fileFilter = (req, file, cb) => {
 };
 
 // Initialize `multer` with the storage options and file filter
-const upload = multer({
+const upload =multer({
     storage: storage,
     fileFilter: fileFilter,
     limits: { fileSize: 1024 * 1024 * 5 } // Limit file size to 5MB
 });
-/*const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/')
-    },
-    filename: function (req, file, cb) {
-        console.log(req.file)
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, 'iti-' + uniqueSuffix + '_' + file.originalname)
-    }});
 
-*/
+
 // create
 const createOneProduct = catchAsync(async (req, res, next) => {
     const { productName, price,  description ,category} = req.body;
+    
     console.log(req.file);
+    console.log(req)
     // Ensure required fields are present
     if (!productName || !price || !description||!category) {
         return next(new AppError('Product name, price, and description are required', 400));
     }
     if(!req.file){
         return next(new AppError('product Photo are required', 500));
-
     }
-        let photo =req.file ? req.file.path : "";
-      //  console.log(req.file.originalname + " file successfully uploaded !!");
-        console.log(photo)
-        // photo.mv(path.join(uploadsFolder,photo.name))
+      
+        const photo= `http://localhost:5000/uploads/${req.file?.filename}`;
     const newProduct = await Product.create({ productName, price,category, description ,photo});
-    console.log(newProduct)
+
     res.status(200).json({
         msg: "success",
         data: newProduct,
-        file: req.file
+        
     });
 
-});
+});    
     //get all products
 const getAllProducts=catchAsync(async(req, res,next) => {
-    const products=await Product.find().sort({createdAt:-1})
-    if(!products){
-        return next(new AppError('Products not found', 404));
-
-    }
-       res.status(200).json([{msg:"success"},{products}])
-
     
-    })
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+    
+        const startIndex = (page - 1) * limit;
+        const total = await Product.countDocuments();
+    
+        const products = await Product.find().sort({createdAt:-1}).skip(startIndex).limit(limit);
+    
+        res.status(200).json({
+            page,
+            limit,
+            total,
+            pages: Math.ceil(total / limit),
+            data: products
+        });
+    });
+    // const products=await Product.find().sort({createdAt:-1})
+  
     //get product by id
 const getOneProduct=catchAsync(async(req,res,next)=>{
     const productId=req.params.id

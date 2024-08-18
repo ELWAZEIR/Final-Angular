@@ -81,7 +81,10 @@ const userSchema=new Schema({
         type:String,
         enum:['admin','client'],
         default:"client",
-    },//email
+    },
+    __v:{
+    type:Number,
+  select:false}//email
     // isConfirm:{
     //   type:Boolean,
     //   default:false

@@ -14,6 +14,7 @@ import path from 'path';
 import catchAsync from './handleErrors/catchAsync.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { getAllProducts } from './controllers/productController.js';
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
@@ -78,6 +79,8 @@ app.post('/api/v1/ng/products/uploads', upload, async(req, res,next) => {
  app.use('/api/v1/ng/users',userRoutes);
  app.use('/api/v1/ng/rates',ratingRoutes);
  app.use('/api/v1/ng/products',productRoutes);
+ app.use('/api/v1/ng/products?page=:page&limit=:limit',getAllProducts)
+ //http://localhost:3000/products?page=1&limit=10
 
 
  app.all('*', (req, res, next) => {

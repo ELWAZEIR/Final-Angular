@@ -31,6 +31,10 @@ const productSchema=new Schema({
         type:String,
         required:true
     },
+    brand:{
+        type:String,
+        require:true
+    },
 cloudinary_id:{type:String,
 },
 status:{type :String,
@@ -63,6 +67,9 @@ favorite:{
     ref:'Favorite',
    
     },  
+    __v:{
+        type:Number,
+      select:false},
   
 },{
     timestamps:true,
