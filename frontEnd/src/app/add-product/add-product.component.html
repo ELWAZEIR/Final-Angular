@@ -1,0 +1,119 @@
+<div class="w-75 m-auto py-4">
+  <form class="mt-5" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <label class="mt-3" for="ProductName">Product title</label>
+    <input
+      type="text"
+      class="form-control my-3"
+      id="ProductName"
+      formControlName="productName"
+      placeholder="Enter Product title"
+    />
+
+    <label for="Productprice">Product price</label>
+    <input
+      type="number"
+      class="form-control my-3"
+      id="Productprice"
+      formControlName="price"
+      placeholder="Enter Product price"
+    />
+
+    <label for="ProductCategory">Product Category</label>
+    <select
+      class="form-control my-3"
+      id="ProductCategory"
+      formControlName="category"
+    >
+      @for(category of categories;track $index){
+      <option>{{ category }}</option>
+      }
+    </select>
+
+    <label for="ProductBrand">Product Brand</label> <!-- إضافة حقل العلامة التجارية -->
+    <input
+      type="text"
+      class="form-control my-3"
+      id="ProductBrand"
+      formControlName="brand"
+      placeholder="Enter Product brand"
+    />
+
+    <label for="ProductImage">Product image</label>
+    <input
+      type="file"
+      class="form-control my-3"
+      id="ProductImage"
+      (change)="onFileSelected($event)"
+    />
+
+    <label for="ProductDesc">Product description</label>
+    <textarea
+      class="form-control my-3"
+      id="ProductDesc"
+      formControlName="description"
+      placeholder="Enter Product description"
+    ></textarea>
+
+    <button class="btn btn-info" id="mainbtn">
+      {{ isUpdateMode ? 'Update' : 'Add' }}
+    </button>
+  </form>
+
+  <!-- جدول عرض المنتجات -->
+  <table class="table table-striped mt-5">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Brand</th> <!-- إضافة عمود العلامة التجارية في الجدول -->
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(product of products; track $index){
+      <tr
+        [class.table-danger]="product.price > 100"
+        [class.table-success]="product.price <= 100"
+      >
+        <td>{{ product.productName }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.brand}}</td> <!-- عرض العلامة التجارية في الجدول -->
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editProduct(product)">
+            Update
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteProduct(product.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <!-- رسالة عند عدم وجود منتجات -->
+  @if(products.length === 0){
+  <p>No products available.</p>
+  }
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

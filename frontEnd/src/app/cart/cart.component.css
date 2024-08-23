@@ -1,0 +1,205 @@
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 12px;
+  background-color: #f5f5f5;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #f68b1e;
+
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+}
+
+.bg-white {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.p-6 {
+  padding: 1.5rem;
+
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.card {
+  border-radius: 0.5rem;
+}
+
+.card-body h5 {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: bold;
+
+
+}
+
+.card-body p {
+  margin-bottom: 0.5rem;
+  color: #777;
+
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-outline-secondary {
+  color: #f68b1e;
+  border-color: #f68b1e;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f68b1e;
+  color: #fff;
+}
+
+button.btn-warning {
+  background-color: #f68b1e; /* Bootstrap warning color */
+  border-color: #f68b1e;
+}
+
+
+button.btn-danger {
+  background-color: #d9534f; /* Bootstrap danger color */
+  border-color: #d9534f;
+}
+
+button.btn-danger {
+  color: #fff;
+}
+
+button.btn-outline-secondary {
+  color: #f68b1e;
+  border-color: #f68b1e;
+}
+
+button.btn-outline-secondary:hover {
+  background-color: #f68b1e;
+  color: #fff;
+}
+
+button.btn-warning:hover {
+  background-color: #f68b1e;
+  border-color: #f68b1e;
+}
+
+button.btn-danger:hover {
+  background-color: #c9302c;
+  border-color: #c9302c;
+}
+
+button.btn-outline-secondary:hover {
+  background-color: #f68b1e;
+  color: #fff;
+}
+
+
+button.btn-warning {
+  color: #fff;
+}
+
+button.btn-warning:hover {
+  background-color: #f68b1e;
+  border-color: #f68b1e;
+
+}
+
+button.btn-danger:hover {
+  background-color: #c9302c;
+  border-color: #c9302c;
+}
+
+
+
+
+/* shopping-cart.component.css */
+
+/* Custom styles */
+.card {
+  border-radius: 0.75rem;
+}
+
+.card-title {
+  color: #333; /* Dark gray for order summary title */
+}
+
+.card-body h5 {
+  color: #333; /* Dark gray for product names */
+}
+
+.card-body p {
+  color: #999; /* Light gray for product prices */
+}
+
+button.btn-outline-secondary {
+  color: #333; /* Dark gray for buttons */
+  border-color: #ddd;
+}
+
+button.btn-outline-danger {
+  color: #d9534f; /* Red for delete button */
+}
+
+button.btn-warning {
+  color: #fff; /* White text on checkout button */
+}
+
+.container {
+  max-width: 1200px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+img {
+  border: 1px solid #ddd;
+}

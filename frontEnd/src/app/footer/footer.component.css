@@ -1,0 +1,30 @@
+footer{
+  
+    background-color: #cecece;
+    
+
+}
+footer ul {
+    list-style: none;
+    padding: 0 !important;
+
+    } 
+footer ul li a{
+text-decoration: none !important;
+color: #6c6c6c ;
+line-height: 2rem;
+transition: all;
+} 
+
+.menu-footer li:hover a{
+    color: #00c3da !important;
+
+}
+
+.footer-btn-list a{
+    padding: 8px 10px !important
+}
+
+.footer-btn:hover {
+background-color: #00c3da !important;}
+

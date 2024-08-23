@@ -1,0 +1,74 @@
+.small-text {
+  font-size: 0.75rem; 
+}
+
+
+/* cart products */
+.bg{
+    background-color: #131722;
+}
+.linkp{
+    text-decoration: none;
+}
+.blog-head{
+    margin: auto;
+    text-align: center;
+    margin-top:2rem ;
+    
+}
+.image{
+    overflow: hidden;
+}
+.image img{
+    transition: all 1s;
+     width: 100%;
+      height: 200px; 
+      object-fit: contain;
+}
+.card:hover .image img{
+    transform: scale(2) rotate(30deg);
+} 
+.card-body{
+    
+    transition: all 1s;
+}
+.card:hover .card-body{
+    box-shadow: inset  0 -300px  0 0 #F5F5DC;
+}
+.card-body  a{
+    text-decoration: none;
+    color: #141313;
+    font-size: 1rem;
+}
+
+
+
+
+/* pag */
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+  display: flex; /* إضافة display flex */
+  justify-content: center; /* محاذاة الأزرار في الوسط */
+}
+
+.pagination button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transition: background-color 0.3s; /* تحسين التأثير عند التمرير */
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
