@@ -17,21 +17,20 @@ import {
   } from "../controllers/productController.js"
 import { createOneRate } from "../controllers/ratingController.js";
 const router=express.Router()
-// router.use(fileUpload())
-//http://localhost:3000/products?page=1&limit=10
+
 router
     .route('/')
     .get(getAllProducts)
 
-    router.route('/').post(upload.single('photo'), createOneProduct);
+router.route('/').post(upload.single('photo'), createOneProduct);
                        //.post(verifyToken,restrictTo('admin'),upload.single('photo'), createOneProduct)
      
 
     router
     .route('/:id')
-    .delete( verifyToken, deleteProduct)
+    .delete(  deleteProduct)
     .get(getOneProduct)
-    .patch(verifyToken,upload.single("photo"),updateProduct)
+    .patch(upload.single("photo"),updateProduct)
 
 // router.get('/verify/:token', verifyAccount)
 // router('/addcat', async (req, res) => {

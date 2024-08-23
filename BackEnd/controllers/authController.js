@@ -34,19 +34,12 @@ const login=catchAsync(async(req,res,next)=>{
     // 2) Check if user exists && password is correct
     const user = await User.findOne({ email }).select('+password');//password.slect=true
         
-   if (!user)// || !(await user.correctPassword(password, user.password))) 
+   if (!user)
     {
    return next(new AppError('Incorrect email or password', 401));
-//return res.status(400).json({msg:'Incorrect email or password'});
 
     }
-    // user.password=undefined
-    //   let token=user.genAuthToken()
-    //   // 3) If everything ok, create and send token to client
-    //   res.status(200).json({
-    //     data:user,
-    //    token
-    //   });
+  
   createSendToken(user, 200, res);
 }); 
 

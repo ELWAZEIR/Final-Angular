@@ -5,34 +5,25 @@ import multer from "multer";
     import path from 'path'
 import { deleteOne } from "./factory.js";
 
-
-
-
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './uploads');
     },
     filename: (req, file, cb) => {
-        // Specify the filename for the uploaded file
-        //console.log(req.file?.path)
-        cb(null, 'ng'+ '-' + file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        cb(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname));
     }
 });
-
 // File filter to allow only specific file types
 const fileFilter = (req, file, cb) => {
-    const fileTypes = /jpeg|jpg|png|gif|jfjf|webp|svg/;
+    const fileTypes = /jpeg|jpg|png|gif|pjpeg|svg|webp|pjp|jfif/;
     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = fileTypes.test(file.mimetype);
-
     if (mimetype && extname) {
         return cb(null, true);
     } else {
         cb('Error: Images Only!');
     }
 };
-
 // Initialize `multer` with the storage options and file filter
 const upload =multer({
     storage: storage,
@@ -40,13 +31,9 @@ const upload =multer({
     limits: { fileSize: 1024 * 1024 * 5 } // Limit file size to 5MB
 });
 
-
 // create
 const createOneProduct = catchAsync(async (req, res, next) => {
     const { productName, price,  description ,category} = req.body;
-    
-    console.log(req.file);
-    console.log(req)
     // Ensure required fields are present
     if (!productName || !price || !description||!category) {
         return next(new AppError('Product name, price, and description are required', 400));
@@ -54,17 +41,18 @@ const createOneProduct = catchAsync(async (req, res, next) => {
     if(!req.file){
         return next(new AppError('product Photo are required', 500));
     }
-      
+      console.log(req.file)
         const photo= `http://localhost:5000/uploads/${req.file?.filename}`;
     const newProduct = await Product.create({ productName, price,category, description ,photo});
-
+    console.log(newProduct)
     res.status(200).json({
         msg: "success",
         data: newProduct,
         
     });
 
-});    
+});
+   
     //get all products
 const getAllProducts=catchAsync(async(req, res,next) => {
     
@@ -110,6 +98,7 @@ const updateProduct=catchAsync(async(req,res,next)=>{
     if(!product){
         return next(new AppError("product not found",404))
     }
+    
     const updatedOne= await Product.findByIdAndUpdate(
         req.params.id, req.body,{
             new: true,
