@@ -1,12 +1,6 @@
-/* import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class CartserviceService {
+import { Injectable, signal } from '@angular/core';
 
-  constructor() { }
-} */
 interface CartItem {
   id: number;
   image: string;
@@ -14,21 +8,40 @@ interface CartItem {
   price: number;
   quantity: number;
 }
-import { Injectable, signal } from '@angular/core';
-// import { CartItem } from './cart-item.model'; // تأكد من وجود هذا النموذج
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  productCart = signal<CartItem[]>([]);
+  productCart = signal<CartItem[]>(this.loadCartFromLocalStorage());
 
-  // دالة لتغيير الكمية
+  // Helper function to check if the code is running in the browser
+  isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+  }
+
+  // Update localStorage only in the browser
+  updateLocalStorage() {
+    if (this.isBrowser()) {
+      localStorage.setItem('cart', JSON.stringify(this.productCart()));
+    }
+  }
+
+  // Load cart data from localStorage only if in the browser
+  loadCartFromLocalStorage(): CartItem[] {
+    if (this.isBrowser()) {
+      const storedCart = localStorage.getItem('cart');
+      return storedCart ? JSON.parse(storedCart) : [];
+    }
+    return []; // Return empty array if not in browser
+  }
+
   handleQuantityChange(id: number, quantity: number) {
     const updatedItems = this.productCart().map((item) =>
       item.id === id ? { ...item, quantity: Math.max(quantity, 1) } : item
     );
-    this.productCart.set(updatedItems); // تحديث العربة بالإعدادات الجديدة
+    this.productCart.set(updatedItems);
+    this.updateLocalStorage(); // Sync with localStorage after quantity change
   }
 
   addToCart(product: CartItem) {
@@ -42,6 +55,7 @@ export class CartService {
         ...this.productCart(),
         { ...product, quantity: 1 },
       ]);
+      this.updateLocalStorage(); // Sync with localStorage after adding item
     }
   }
 
@@ -50,6 +64,7 @@ export class CartService {
       (item) => item.id !== productId
     );
     this.productCart.set(updatedItems);
+    this.updateLocalStorage(); // Sync with localStorage after removing item
   }
 
   get subtotal() {
@@ -67,4 +82,3 @@ export class CartService {
     return this.subtotal + this.tax;
   }
 }
-
