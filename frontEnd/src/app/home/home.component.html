@@ -240,21 +240,28 @@
             <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4">
               <ul class="pagination">
+                <!-- زر السابق -->
                 <li class="page-item" [class.disabled]="currentPage === 1">
                   <button class="page-link" (click)="goToPage(currentPage - 1)">Previous</button>
                 </li>
+            
+                <!-- أرقام الصفحات -->
                 <li
                   class="page-item"
-                  *ngFor="let page of totalPagesArray; let i = index"
-                  [class.active]="currentPage === i + 1"
+                  *ngFor="let page of totalPagesArray; trackBy: trackByPage"
+                  [class.active]="currentPage === page"
                 >
-                  <button class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</button>
+                  <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
                 </li>
+            
+                <!-- زر التالي -->
                 <li class="page-item" [class.disabled]="currentPage === totalPages">
                   <button class="page-link" (click)="goToPage(currentPage + 1)">Next</button>
                 </li>
               </ul>
             </div>
+            
+            
           </div>
         </div>
       </section>
