@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import this if you're using forms
 import { RouterModule } from '@angular/router';
-
+import "./navbar.component.css"
 @Component({
   selector: 'app-navbar',
   standalone: true,
