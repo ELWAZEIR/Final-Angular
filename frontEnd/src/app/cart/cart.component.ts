@@ -7,6 +7,7 @@ import { TrashIconComponent } from '../trash-icon/trash-icon.component';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../cartservice.service'; // استيراد CartService
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -25,8 +26,12 @@ import { RouterLink } from '@angular/router';
   styleUrl: './cart.component.css',
 })
 export class CartComponent {
-  constructor(public cartService: CartService) {} // حقن CartService
+  constructor(public cartService: CartService,private router: Router) {} // حقن CartService
 
+
+  navigateToCheckout() {
+    this.router.navigate(['/checkout']); 
+  }
   // استخدام الخصائص من CartService
   get subtotal() {
     return this.cartService.subtotal;

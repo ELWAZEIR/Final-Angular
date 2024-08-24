@@ -1,5 +1,7 @@
 <div class="w-75 m-auto py-4">
   <form class="mt-5" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+<!-- ================== -->
     <label class="mt-3" for="ProductName">Product title</label>
     <input
       type="text"
@@ -8,7 +10,9 @@
       formControlName="productName"
       placeholder="Enter Product title"
     />
-
+    @if(errorMessages['productName'] ){ <div  class="text-danger">
+      <h1>{{ errorMessages['productName'] }}</h1>
+    </div>}
     <label for="Productprice">Product price</label>
     <input
       type="number"
@@ -17,6 +21,37 @@
       formControlName="price"
       placeholder="Enter Product price"
     />
+
+    @if(errorMessages['price']){ <div class="text-danger">
+      <h1>{{ errorMessages['price'] }}</h1>
+    </div>}
+   
+  
+    <label for="ProductBrand">Product Brand</label>
+    <input
+      type="text"
+      class="form-control my-3"
+      id="ProductBrand"
+      formControlName="brand"
+      placeholder="Enter Product brand"
+    />
+    @if(errorMessages['brand']){<div class="text-danger">
+      <h1>{{ errorMessages['brand'] }}</h1>
+    </div>}
+    
+  
+    <label for="ProductDesc">Product description</label>
+    <textarea
+      class="form-control my-3"
+      id="ProductDesc"
+      formControlName="description"
+      placeholder="Enter Product description"
+    ></textarea>
+    @if(errorMessages['description']){<div class="text-danger">
+      <h1>{{ errorMessages['description'] }}</h1>
+    </div>}
+    
+<!-- ================== -->
 
     <label for="ProductCategory">Product Category</label>
     <select
@@ -29,14 +64,6 @@
       }
     </select>
 
-    <label for="ProductBrand">Product Brand</label> <!-- إضافة حقل العلامة التجارية -->
-    <input
-      type="text"
-      class="form-control my-3"
-      id="ProductBrand"
-      formControlName="brand"
-      placeholder="Enter Product brand"
-    />
 
     <label for="ProductImage">Product image</label>
     <input
@@ -46,13 +73,7 @@
       (change)="onFileSelected($event)"
     />
 
-    <label for="ProductDesc">Product description</label>
-    <textarea
-      class="form-control my-3"
-      id="ProductDesc"
-      formControlName="description"
-      placeholder="Enter Product description"
-    ></textarea>
+   
 
     <button class="btn btn-info" id="mainbtn">
       {{ isUpdateMode ? 'Update' : 'Add' }}
@@ -99,21 +120,5 @@
   <!-- رسالة عند عدم وجود منتجات -->
   @if(products.length === 0){
   <p>No products available.</p>
-  }
+  }
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

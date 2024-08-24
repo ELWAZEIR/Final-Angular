@@ -1,13 +1,23 @@
- <div class="container py-5">
-    <div class="row py-5">
-        <div class="col-md-3 mt-2">
-            <img class="w-100" [src]="productDetails.image">
+<div class="container py-5">
+    <div class="row justify-content-center align-items-center min-vh-100">
+      <div class="col-md-8 col-lg-6 text-center">
+        <!-- صورة المنتج -->
+        <div class="mb-4">
+          <img class="img-fluid rounded shadow-sm" [src]="productDetails.photo" alt="{{productDetails.productName}}">
         </div>
-        <div class="col-md-9">
-            <h2 class="fw-bolder">{{productDetails.title}}</h2>
-            <h2 class="fw-bolder">{{productDetails.category}}</h2>
-            <p class="text-muted p-2">{{productDetails.description}}</p>
+        <!-- تفاصيل المنتج -->
+        <div>
+          <h1 class="fw-bold mb-3">{{productDetails.productName}}</h1>
+          <h4 class="text-secondary mb-4">{{productDetails.category}}</h4>
+          <p class="text-muted mb-4">{{productDetails.description}}</p>
+          <div class="d-flex justify-content-center mb-4">
+            <!-- يمكنك إضافة عنصر السعر هنا إذا كنت ترغب في عرضه -->
+            <span class="display-4 fw-bold text-primary">${{productDetails.price}}</span>
+          </div>
+          <!-- إضافة أزرار للتفاعل مع المنتج مثل "إضافة إلى السلة" -->
+          <button class="btn btn-primary btn-lg">Add to Cart</button>
         </div>
-
+      </div>
     </div>
-</div>
+  </div>
+  
