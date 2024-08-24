@@ -24,6 +24,13 @@ getData(page: number, limit: number): Observable<any> {
   getproductDetails(id: any): Observable<any> {
     return this._HttpClient.get<any>(`http://localhost:5000/api/v1/ng/products/${id}`);
   }
+// Add this method to your ProductsService
+searchProducts(query: string) {
+  return this._HttpClient.get<IProduct[]>(
+    `http://localhost:5000/api/v1/ng/products?search=${query}`
+  );
+}
+
 
   // Add product to cart
   addToCart(product: IProduct) {

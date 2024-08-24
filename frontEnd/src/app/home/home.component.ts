@@ -58,6 +58,14 @@ export class HomeComponent implements OnInit {
   }
 
   filterProducts() {
+    // Ensure minPrice and maxPrice are not negative
+    if (this.minPrice !== null && this.minPrice < 0) {
+      this.minPrice = 0;
+    }
+    if (this.maxPrice !== null && this.maxPrice < 0) {
+      this.maxPrice = 0;
+    }
+
     this.filteredProducts = this.products.filter((product) => {
       const matchesCategory = this.selectedCategory ? product.category === this.selectedCategory : true;
       const matchesBrand = this.selectedBrand ? product.brand === this.selectedBrand : true;
@@ -122,4 +130,5 @@ export class HomeComponent implements OnInit {
   trackByPage(index: number, page: number): number {
     return page;
   }
+
 }

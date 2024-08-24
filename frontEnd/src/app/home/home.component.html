@@ -1,21 +1,137 @@
 <div class="container my-4">
   <div class="row">
-    <aside class="col-md-2 bg-light p-3">
+    <aside class="col-md-2 bg-light p-3 border rounded">
+      <h4 class="mb-4">Categories</h4>
       <ul class="list-unstyled">
-        <li><i class="fa-solid fa-apple-whole"></i> Supermarket</li>
-        <li><i class="fa-solid fa-shirt"></i> Fashion</li>
-        <li><i class="fa-solid fa-paintbrush"></i> Health & Beauty</li>
-        <li><i class="fa-solid fa-baby"></i> Baby Products</li>
-        <li><i class="fa-solid fa-mobile-screen"></i> Phones & Tablets</li>
-        <li><i class="fa-solid fa-house"></i> Home & Furniture</li>
-        <li><i class="fa-solid fa-apple-whole"></i> Appliances</li>
-        <li><i class="fa-solid fa-tv"></i> Televisions & Audio</li>
-        <li><i class="fa-solid fa-laptop"></i> Computing</li>
-        <li><i class="fa-solid fa-dumbbell"></i> Sporting Goods</li>
-        <li><i class="fa-solid fa-gamepad"></i> Gaming</li>
-        <li><i class="fa-solid fa-tags"></i> Other Categories</li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'supermarket']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-apple-whole me-2"></i> Supermarket
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'fashion']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-shirt me-2"></i> Fashion
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'health-beauty']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-paintbrush me-2"></i> Health & Beauty
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'baby-products']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-baby me-2"></i> Baby Products
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'phones-tablets']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-mobile-screen me-2"></i> Phones & Tablets
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'home-furniture']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-house me-2"></i> Home & Furniture
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'appliances']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-apple-whole me-2"></i> Appliances
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'televisions-audio']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-tv me-2"></i> Televisions & Audio
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'computing']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-laptop me-2"></i> Computing
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'sporting-goods']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-dumbbell me-2"></i> Sporting Goods
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'gaming']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-gamepad me-2"></i> Gaming
+          </a>
+        </li>
+        <li class="mb-2">
+          <a [routerLink]="['/home', 'other']" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-tags me-2"></i> Other Categories
+          </a>
+        </li>
       </ul>
     </aside>
+
+    <!-- <aside class="col-md-2 bg-light p-3 border rounded">
+      <h4 class="mb-4">Categories</h4>
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-apple-whole me-2"></i> Supermarket
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-shirt me-2"></i> Fashion
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-paintbrush me-2"></i> Health & Beauty
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-baby me-2"></i> Baby Products
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-mobile-screen me-2"></i> Phones & Tablets
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-house me-2"></i> Home & Furniture
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-apple-whole me-2"></i> Appliances
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-tv me-2"></i> Televisions & Audio
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-laptop me-2"></i> Computing
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-dumbbell me-2"></i> Sporting Goods
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-gamepad me-2"></i> Gaming
+          </a>
+        </li>
+        <li class="mb-2">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="fa-solid fa-tags me-2"></i> Other Categories
+          </a>
+        </li>
+      </ul>
+    </aside> -->
+
 
     <!-- Filter and Products Section -->
     <div class="col-md-10">
@@ -53,7 +169,7 @@
           }
           </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 align-self-end">
           <label for="minPrice" class="form-label">Min Price</label>
           <input
             id="minPrice"
@@ -61,6 +177,7 @@
             class="form-control"
             [(ngModel)]="minPrice"
             (input)="filterProducts()"
+            min="0"
           />
         </div>
         <div class="col-md-2">
@@ -71,6 +188,7 @@
             class="form-control"
             [(ngModel)]="maxPrice"
             (input)="filterProducts()"
+            min="0"
           />
         </div>
         <div class="col-md-2 align-self-end">
@@ -97,7 +215,8 @@
         <div class="container">
           <div class="row">
             <h1 class="text-center mb-5">My Products</h1>
-@for (product of filteredProducts; track $index) {
+@for (product of filteredProducts; track filteredProducts){
+
             <div class="col-md-4 mb-4" >
               <div class="card product-card shadow-sm">
                 <img class="card-img-top img-fluid" [src]="product.photo" alt="{{ product.productName }}" />
