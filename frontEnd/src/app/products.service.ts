@@ -25,7 +25,7 @@ export class ProductsService {
 
   getData(): Observable<any> {
     return this._HttpClient.get<IProduct[]>(
-      'http://localhost:5000/api/v1/ng/products?page=1&limit=10'
+      'http://localhost:5000/api/v1/ng/products/'
     );
   }
 
@@ -48,6 +48,6 @@ export class ProductsService {
       });
     }
 
- 
+
 
 }

@@ -1,139 +1,167 @@
+<!-- Main Container -->
 <div class="container my-4">
   <div class="row">
-    <!-- catagory -->
-    <div class="col-md-2 bg-light">
-      <p><i class="fa-solid fa-apple-whole"></i> Supermarket</p>
-      <p><i class="fa-solid fa-shirt"></i> Fashion</p>
-      <p><i class="fa-solid fa-paintbrush"></i> Health & Beauty</p>
-      <p><i class="fa-solid fa-baby"></i> Baby Products</p>
-      <p><i class="fa-solid fa-mobile-screen"></i> Phones & Tablets</p>
-      <p><i class="fa-solid fa-house"></i> Home & Furniture</p>
-      <p><i class="fa-solid fa-apple-whole"></i> Appliances</p>
-      <p><i class="fa-solid fa-apple-whole"></i> Televisions & Audio</p>
-      <p><i class="fa-solid fa-apple-whole"></i> Computing</p>
-      <p><i class="fa-solid fa-apple-whole"></i> Sporting Goods</p>
-      <p><i class="fa-solid fa-apple-whole"></i> Gaming</p>
-      <p><i class="fa-solid fa-apple-whole"></i> Other categories</p>
-    </div>
-    <div class="col-md-8">
-      <!-- slider  -->
-      <div
-        id="carouselExampleIndicators"
-        class="carousel slide"
-        data-bs-ride="carousel"
-      >
-        <div class="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="./712X384EN (1).png" class="d-block w-100" alt="..." />
-          </div>
-          <div class="carousel-item">
-            <img src="./712x384EN (2).png" class="d-block w-100" alt="..." />
-          </div>
-          <div class="carousel-item">
-            <img src="./712x384EN.png" class="d-block w-100" alt="..." />
-          </div>
-        </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
+    <!-- Category Section -->
+    <aside class="col-md-2 bg-light p-3">
+      <ul class="list-unstyled">
+        <li><i class="fa-solid fa-apple-whole"></i> Supermarket</li>
+        <li><i class="fa-solid fa-shirt"></i> Fashion</li>
+        <li><i class="fa-solid fa-paintbrush"></i> Health & Beauty</li>
+        <li><i class="fa-solid fa-baby"></i> Baby Products</li>
+        <li><i class="fa-solid fa-mobile-screen"></i> Phones & Tablets</li>
+        <li><i class="fa-solid fa-house"></i> Home & Furniture</li>
+        <li><i class="fa-solid fa-apple-whole"></i> Appliances</li>
+        <li><i class="fa-solid fa-tv"></i> Televisions & Audio</li>
+        <li><i class="fa-solid fa-laptop"></i> Computing</li>
+        <li><i class="fa-solid fa-dumbbell"></i> Sporting Goods</li>
+        <li><i class="fa-solid fa-gamepad"></i> Gaming</li>
+        <li><i class="fa-solid fa-tags"></i> Other Categories</li>
+      </ul>
+    </aside>
 
-    <!-- Join Jumia -->
-    <div class="col-md-2 mt-4 bg-light">
-      <div class="d-flex align-items-center">
-        <div><i class="fas fa-star fa-2x text-warning mr-2"></i></div>
-        <div class="ms-1">
-          <p class="mb-0">Join Jumia</p>
-          <p class="mt-0 small-text">as a Sales Consultant</p>
+    <!-- Filter and Products Section -->
+    <div class="col-md-10">
+      <!-- Filter Section -->
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <label for="categorySelect" class="form-label">Category</label>
+          <select id="categorySelect" class="form-select" [(ngModel)]="selectedCategory" (change)="filterProducts()">
+            <option value="">All Categories</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="brandSelect" class="form-label">Brand</label>
+          <select id="brandSelect" class="form-select" [(ngModel)]="selectedBrand" (change)="filterProducts()">
+            <option value="">All Brands</option>
+            <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="minPrice" class="form-label">Min Price</label>
+          <input id="minPrice" type="number" class="form-control" [(ngModel)]="minPrice" (input)="filterProducts()" />
+        </div>
+        <div class="col-md-2">
+          <label for="maxPrice" class="form-label">Max Price</label>
+          <input id="maxPrice" type="number" class="form-control" [(ngModel)]="maxPrice" (input)="filterProducts()" />
+        </div>
+        <div class="col-md-2 align-self-end">
+          <button class="btn btn-secondary w-100" (click)="resetFilters()">Reset Filters</button>
         </div>
       </div>
-      <div class="d-flex align-items-center">
-        <i class="fas fa-shopping-cart fa-2x text-warning mr-2"></i>
-        <div class="ms-1">
-          <p class="mb-0">Sell on Jumia</p>
-          <p class="mt-0 small-text">And Grow Your Business</p>
+
+      <!-- Products Section -->
+      <section class="bg-light py-5">
+        <div class="container">
+          <div class="row">
+            <h1 class="text-center mb-5">My Products</h1>
+
+            <!-- Loop through products -->
+             @for (product of filteredProducts; track filteredProducts) {
+            <div class="col-md-4 mb-4" >
+              <div class="card product-card shadow-sm">
+                <img class="card-img-top img-fluid" [src]="product.photo" alt="{{ product.productName }}" />
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.productName.split(' ').slice(0, 3).join(' ') }}</h5>
+                  <p class="text-muted small">May 3, 2018 By John Smith</p>
+                  <p class="card-text">
+                    {{ product.description.split(' ').slice(0, 8).join(' ') }}...
+                    <a [routerLink]="['/details', product.id]" class="text-warning">read more</a>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="text-primary">{{ product.price | currency: 'EUR' }}</h4>
+                    <button class="btn btn-warning btn-sm" (click)="addToCart(product)">
+                      <i class="fa-solid fa-cart-shopping"></i> Add to cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+          </div>
         </div>
-      </div>
-      <div class="d-flex align-items-center">
-        <i class="fas fa-shield-alt fa-2x text-warning mr-2"></i>
-        <div class="ms-1">
-          <p class="mb-0">Warranty</p>
-          <p class="mt-0 small-text">On Your Purchases</p>
-        </div>
-      </div>
+      </section>
     </div>
   </div>
 </div>
-<div class="bg">
-<div class=" container ">
-    <div class="row">
-        <h1 class="text-center mt-5 text-light">My Products</h1>
-        @for (product of products; track $index) {
 
-    <div class="col-md-4 mt-3 mb-5">
-      <a class="text-decoration-none" >
-        <a class="linkp" >
-          <div class="card">
-            <div class="image">
-              <img class="card-img-top pt-1" [src]="product.photo" alt="Card image cap">
-            </div>
-            <div class="card-body">
-                <h4 class="card-title"> {{product.productName.split(' ').slice(0,3).join(' ')}}</h4>
-                
-                <span>May 3, 2018 </span> <span class="ml-4">By John Smith</span>
-              <p class="card-text mt-2 ">{{product.description.split(' ').slice(0,8).join(' ')}}<span role="button" class=" ps-2 text-primary " [routerLink]="['/details',product.id ]">read more...</span></p>
-              <div class=" row">
-                  <h4 class="col-md-6" >{{product.price | currency:'EUR'}}</h4>
-                <p class="btn col-md-6 bg-success " (click)="addToCart(product)"><i class="fa-solid fa-cart-shopping"></i>Add to cart</p>
-                
-             
-              </div>
-            </div>
-          </div>
-          </a> 
-           </a>
-        </div> 
+<!-- Bootstrap Styling and Custom CSS -->
+<style>
+  body {
+    background-color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
 
-        }
-   
-    </div>
-</div>
-</div>
+
+  }
+
+  /* Navbar Styling */
+  .navbar {
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+  }
+
+
+  /* Product Card Customization */
+  .product-card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  }
+
+  .card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .text-muted {
+    font-size: 0.85rem;
+  }
+
+  /* Button Styles */
+  .btn-warning {
+    background-color: #ffbf00;
+    border-color: #ffbf00;
+    color: white;
+  }
+
+  .btn-warning:hover {
+    background-color: #e6ac00;
+    border-color: #e6ac00;
+  }
+
+  /* Price Styles */
+  .text-primary {
+    color: #ffbf00 !important;
+    font-weight: 600;
+  }
+
+  .mb-4 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .text-warning {
+    color: #ffbf00 !important;
+    font-weight: 500;
+  }
+
+  .text-warning:hover {
+    text-decoration: underline;
+  }
+
+</style>
