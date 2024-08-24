@@ -2,13 +2,17 @@
   <h1 class="mb-4 text-center" style="color: #f68b1e">Shopping Cart</h1> <!-- Jumia orange -->
 
   <!-- Check if the cart is not empty -->
+
   <div *ngIf="cartService.productCart().length > 0; else emptyCart">
     <div class="row">
       <div class="col-md-8 mb-4">
         <div class="card border-0 shadow-sm">
+
+
           <div class="card-body p-4">
+            @for (item of cartService.productCart(); track cartService.productCart()) {
             <div
-              *ngFor="let item of cartService.productCart()"
+
               class="d-flex align-items-center justify-content-between mb-4 pb-4 border-bottom"
             >
               <div class="d-flex align-items-center">
@@ -49,6 +53,7 @@
                 </button>
               </div>
             </div>
+          }
           </div>
         </div>
       </div>
@@ -85,13 +90,15 @@
     </div>
   </div>
 
+
+
   <!-- Template for empty cart view -->
   <ng-template #emptyCart>
     <div class="text-center py-5">
       <img
-        src="path/to/empty-cart-icon.png"
+        src="https://www.jumia.com.eg/assets_he/images/cart.668e6453.svg"
         alt="Empty Cart"
-        class="mb-4"
+        class="mb-4 border-0"
         style="width: 100px"
       />
       <h3 class="mb-3" style="color: #333">Your cart is empty!</h3>
@@ -119,9 +126,10 @@
         <!-- Example of one item, repeat for others -->
         <div class="card border-0 me-3" style="width: 150px">
           <img
-            src="path/to/item-image.jpg"
+            src="https://eg.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/93/106504/1.jpg?8879"
             class="card-img-top img-fluid"
             alt="Item Name"
+
           />
           <div class="card-body p-2 text-center">
             <span

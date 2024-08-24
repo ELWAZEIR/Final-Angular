@@ -71,16 +71,25 @@ export class ProductsService {
   products$ = this.productsSubject.asObservable();
 
   // Get products with pagination support
-  getData(page: number, limit: number): Observable<any> {
+  getData(page: number, limit: number, selectedSort?: number, selectedCategory?: string): Observable<any> {
     return this._HttpClient.get<IProduct[]>(
-      `http://localhost:5000/api/v1/ng/products`
+      `http://localhost:5000/api/v1/ng/products?page=1&limit=10`
+      // `http://localhost:5000/api/v1/ng/products?page=4&limit=6`
     );
+
   }
 
   // Get product details by ID
   getproductDetails(id: number): Observable<any> {
     return this._HttpClient.get<any>(`http://localhost:5000/api/v1/ng/products/${id}`);
   }
+// Add this method to your ProductsService
+searchProducts(query: string) {
+  return this._HttpClient.get<IProduct[]>(
+    `http://localhost:5000/api/v1/ng/products?search=${query}`
+  );
+}
+
 
   // Add product to cart
   addToCart(product: IProduct) {
