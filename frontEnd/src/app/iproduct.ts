@@ -1,4 +1,5 @@
 export interface IProduct {
+  popularity: any;
   quantity: any;
   id: any;
   productName: string;
@@ -8,4 +9,5 @@ export interface IProduct {
   photo: string;
   ratingsAvg: number;
   brand:string;
+
 }

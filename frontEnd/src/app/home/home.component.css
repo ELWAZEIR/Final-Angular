@@ -1,5 +1,5 @@
 .small-text {
-  font-size: 0.75rem; 
+  font-size: 0.75rem;
 }
 
 
@@ -14,7 +14,7 @@
     margin: auto;
     text-align: center;
     margin-top:2rem ;
-    
+
 }
 .image{
     overflow: hidden;
@@ -22,14 +22,14 @@
 .image img{
     transition: all 1s;
      width: 100%;
-      height: 200px; 
+      height: 200px;
       object-fit: contain;
 }
 .card:hover .image img{
     transform: scale(2) rotate(30deg);
-} 
+}
 .card-body{
-    
+
     transition: all 1s;
 }
 .card:hover .card-body{
@@ -72,3 +72,57 @@
   color: white;
 }
 
+/* Product Card Customization */
+.product-card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333333;
+}
+
+.text-muted {
+  font-size: 0.85rem;
+}
+
+/* Button Styles */
+.btn-warning {
+  background-color: #ffbf00;
+  border-color: #ffbf00;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #e6ac00;
+  border-color: #e6ac00;
+}
+
+/* Price Styles */
+.text-primary {
+  color: #ffbf00 !important;
+  font-weight: 600;
+}
+
+/* Pagination */
+.pagination .page-item .page-link {
+  color: #ffbf00;
+}
+.pagination .page-item.active .page-link {
+  background-color: #ffbf00;
+  border-color: #ffbf00;
+}
