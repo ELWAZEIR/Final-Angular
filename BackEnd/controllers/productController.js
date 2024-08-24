@@ -72,7 +72,7 @@ const getAllProducts=catchAsync(async(req, res,next) => {
             data: products
         });
     });
-    // const products=await Product.find().sort({createdAt:-1})
+    
   
     //get product by id
 const getOneProduct=catchAsync(async(req,res,next)=>{
@@ -120,6 +120,47 @@ const updateProduct=catchAsync(async(req,res,next)=>{
 //     //     next(err);
 //     // }
 // };
+const nameProduct = catchAsync(async (req, res, next) => {
+    const { productName } = req.query;
+    // console.log(productName)
+    if (!productName) {
+        return res.status(400).json({ msg: "Please provide a product name in the query string" });
+    }
+    
+    try{
+     const data = await Product.find({  productName: { $regex: `^${productName}`, $options:'i' }})//({  userName: { $regex: `^${productName } });
+    if (data.length > 0) {
+        res.status(200).json({ msg: "Success found", data });
+    } else {
+        // No products found
+        res.status(404).json({ msg: "No products found" });
+    }}
+    catch (error) {
+        // Handle database errors
+        return next(new AppError("Something went wrong while searching for products", 500));
+    }
+});
+const categoryProduct = catchAsync(async (req, res, next) => {
+    const { category } = req.query;
+    if (!category) {
+        return res.status(400).json({ msg: "Please provide a category in the query string" });
+    }
+try{
+    const data = await Product.find({ 
+        category: { $regex: `^${category}`, $options:'i' }//({  userName: { $regex: `^${userName}`,$options:'i' }});
+    });
+    if (data.length > 0) {
+        res.status(200).json({ msg: "Success found", data });
+    } else {
+        // No products found
+        res.status(404).json({ msg: "No products found" });
+    }
+}
+catch (error) {
+    // Handle database errors
+    return next(new AppError("Something went wrong while searching for products", 500));
+}
+})
 export{
     getAllProducts,
     createOneProduct,
@@ -127,7 +168,8 @@ export{
     deleteProduct,
     updateProduct,
     upload,
-    
+    nameProduct,
+    categoryProduct
 }
 /**
 //JS file on node side
@@ -157,43 +199,6 @@ app.post('/file_upload', function (req, res) {
    var bufDataFile = new Buffer(req.files.file.data, "utf-8");
    console.log('étape 3.1');
    console.log('__dirname : ' + __dirname);
-   fs.writeFile(__dirname + '/file_upload/output.txt', bufDataFile,  function(err) {
-      if (err) {
-         return console.error(err);
-      }
-      else {
-         console.log("Data written successfully !");
-      }      
-      console.log('étape 4');
-      res.end('Fin OK !!!');  
-   })
-})
-var server = app.listen(8081, function () {
-   var host = server.address().address
-   var port = server.address().port
-   console.log("Example app listening at http://%s:%s", host, port);
-})
+ 
   */
- /**
-  * exports.getAllorders = catchAsync (async (req, res, next)=> {
-const features = new APIFeatures(Order.find(), req.query)
-.filter()
-.limitFields()
-.sort()
-.paginate();
-const orders = await features.query;
-const populated = await Order.populate(orders,
-{path:"craft",
-select: "name"});
-const CraftOrders = populated.map((order)=>({
-...order.toObject(),
-craft: order.craft,
-}));
-const count = await Order.countDocuments();
-//console,log(count);
-res.status(200).json({
-count,
-results: CraftOrders
-});
-});
-  */
+ 

@@ -12,7 +12,8 @@ import {
     createOneProduct,
     deleteProduct,
     getOneProduct,
-    updateProduct,
+    updateProduct,nameProduct,
+    categoryProduct
     // addcat2706400
   } from "../controllers/productController.js"
 import { createOneRate } from "../controllers/ratingController.js";
@@ -22,15 +23,20 @@ router
     .route('/')
     .get(getAllProducts)
 
-router.route('/').post(upload.single('photo'), createOneProduct);
-                       //.post(verifyToken,restrictTo('admin'),upload.single('photo'), createOneProduct)
+router
+    .route('/')
+    .post(upload.single('photo'), createOneProduct);
+     //.post(verifyToken,restrictTo('admin'),upload.single('photo'), createOneProduct)
      
 
     router
-    .route('/:id')
-    .delete(  deleteProduct)
-    .get(getOneProduct)
-    .patch(upload.single("photo"),updateProduct)
+    .route('/searchByName')
+    .get(nameProduct)
+    router
+    .route('/searchByCategory')
+    .get(categoryProduct)
+
+//http://localhost:5000/api/v1/products/search?productName=example
 
 // router.get('/verify/:token', verifyAccount)
 // router('/addcat', async (req, res) => {
@@ -45,6 +51,11 @@ router.route('/').post(upload.single('photo'), createOneProduct);
 //     //     next(err);
 //     // }
 // })
+router
+.route('/:id')
+.delete(  deleteProduct)
+.get(getOneProduct) 
+.patch(upload.single("photo"),updateProduct)
 router
 .route('/:productId/ratings')
 .post(
