@@ -31,6 +31,7 @@
     "bootstrap-icons": "^1.11.3",
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
+    "joi": "^17.13.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

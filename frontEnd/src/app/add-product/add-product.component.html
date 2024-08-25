@@ -80,14 +80,13 @@
     </button>
   </form>
 
-  <!-- جدول عرض المنتجات -->
   <table class="table table-striped mt-5">
     <thead>
       <tr>
         <th>Title</th>
         <th>Price</th>
         <th>Category</th>
-        <th>Brand</th> <!-- إضافة عمود العلامة التجارية في الجدول -->
+        <th>Brand</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -100,7 +99,7 @@
         <td>{{ product.productName }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.category }}</td>
-        <td>{{ product.brand}}</td> <!-- عرض العلامة التجارية في الجدول -->
+        <td>{{ product.brand}}</td>
         <td>
           <button class="btn btn-warning btn-sm" (click)="editProduct(product)">
             Update
@@ -117,7 +116,6 @@
     </tbody>
   </table>
 
-  <!-- رسالة عند عدم وجود منتجات -->
   @if(products.length === 0){
   <p>No products available.</p>
   }

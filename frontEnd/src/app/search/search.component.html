@@ -1,0 +1,47 @@
+
+    <!-- <div *ngFor="let product of products" class="product-item">
+      <h3>{{ product.productName }}</h3>
+      <p>{{ product.description }}</p>
+      <p>Price: {{ product.price | currency }}</p>
+      Add more product details here -->
+    <!-- </div>  -->
+
+    @if(products.length > 0)
+  {
+
+  <section class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <h1 class="text-center mb-5">My Products</h1>
+@for (product of products; track product.id){
+
+        <div class="col-md-4 mb-4" >
+          <div class="card product-card shadow-sm">
+            <img class="card-img-top img-fluid" [src]="product.photo" alt="{{ product.productName }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ product.productName.split(' ').slice(0, 3).join(' ') }}</h5>
+              <p class="text-muted small">By John Smith</p>
+              <p class="card-text">
+                {{ product.description.split(' ').slice(0, 8).join(' ') }}...
+                <a [routerLink]="['/details', product.id]" class="text-warning">read more</a>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <h4 class="text-primary">{{ product.price | currency: 'EUR' }}</h4>
+                <button class="btn btn-warning btn-sm" (click)="addToCart(product)">
+                  <i class="fa-solid fa-cart-shopping"></i> Add to cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    
+      </div>
+    </div>
+  </section>}
+@else {
+      <ng-template>
+        <p>No products found for "{{ searchQuery }}".</p>
+      </ng-template>}
+    
+    

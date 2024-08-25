@@ -1,0 +1,154 @@
+<div class="text-center">
+    <img src="myjumia-top-logo.png" alt="Jumia" width="60px" height="60px" style="object-fit: contain;" />
+  </div>
+  <h6 class="text-center d-inline-block-">
+    Welcome to <h3 class="text-center d-inline-block">Jumia</h3>
+  </h6>
+  <form (ngSubmit)="addNewUser()" [formGroup]="formGroup" class="d-flex flex-column">
+    <div class="form-group mb-3 h-25 m-auto pt-2 col-lg-4 col-md-4 col-sm-4  ">
+        <input 
+          type="text"
+          class="form-control"
+          id="fullNameInput"
+          placeholder="Enter fullName"
+          formControlName="fullName"
+          [ngClass]="{ 'is-invalid': fullName?.touched && fullName?.invalid }"
+          style="padding:.85rem 1rem;" />
+          
+        @if(fullName?.errors?.['required'])
+        {
+          <span class="text-danger">full Name is required</span>
+        }
+        
+        @if(fullName?.errors?.['minLength'])
+        {
+          <span class="text-danger">at least 3 characters for  fullName</span>
+        }
+      </div>
+      <div class="form-group mb-3 h-25 m-auto pt-2 col-lg-4 col-md-4 col-sm-4">
+        <input 
+          type="number"
+          class="form-control"
+          id="ageInput"
+          placeholder="Enter age"
+          formControlName="age"
+          [ngClass]="{ 'is-invalid': age?.touched && age?.invalid }"
+          style="padding:.85rem 1rem;" />
+          
+        @if(age?.errors?.['required'])
+        {
+          <span class="text-danger">age is required</span>
+        }
+        
+        @if(age?.errors?.['min'])
+        {
+          <span class="text-danger">at least 7 years for  age</span>
+        }
+      </div>
+      <div class="form-group  m-auto  col-lg-4 col-md-4 col-sm-4 d-flex  justify-content-center p-2 ">
+        <label for="genderInput" class="text-start px-2">Gender</label>
+       <div class="px-2">
+         <label for="male">male</label>
+        <input 
+          type="radio"
+          class="form-control"
+          id="male"
+          value="male"
+          
+          formControlName="gender"
+          />
+        </div>
+        <div class="px-2 ">
+          <label for="female">female</label>
+          <input 
+            type="radio"
+            class="form-control"
+            id="female"
+            value="female"
+            formControlName="gender"
+            />
+            <br/>
+        </div>
+        
+        @if(gender?.errors?.['required'])
+        {
+          
+          <p class="text-danger px-2">gender is required</p>
+        }
+        
+        <!-- @if(fullName?.errors?.['minLength'])
+        {
+          <span class="text-danger">at least 3 characters for  fullName</span>
+        } -->
+      </div>
+      <div class="form-group mb-3 h-25 m-auto pt-2 col-lg-4 col-md-4 col-sm-4">
+        <input 
+          type="text"
+          class="form-control"
+          id="addressInput"
+          placeholder="Enter address"
+          formControlName="address"
+          [ngClass]="{ 'is-invalid': address?.touched && address?.invalid }"
+          style="padding:.85rem 1rem;" />
+          
+        @if(address?.errors?.['required'])
+        {
+          <span class="text-danger">address is required</span>
+        }
+        
+        @if(address?.errors?.['minLength'])
+        {
+          <span class="text-danger">at least 2 characters for  address</span>
+        }
+      </div>
+    <div class="form-group mb-3 h-25 m-auto pt-2 col-lg-4 col-md-4 col-sm-4">
+      <input 
+        type="email"
+        class="form-control"
+        id="emailInput"
+        placeholder="Enter email"
+        formControlName="email"
+        [ngClass]="{ 'is-invalid': email?.touched && email?.invalid }"
+        style="padding:.85rem 1rem;" />
+        
+      @if(email?.errors?.['required'])
+      {
+        <span class="text-danger">Email is required</span>
+      }
+      
+      @if(email?.errors?.['pattern'])
+      {
+        <span class="text-danger">Invalid email</span>
+      }
+    </div>
+  
+    <div class="form-group mb-3 m-auto col-lg-4 col-md-4 col-sm-4">
+      <input
+        type="password"
+        class="form-control"
+        id="passwordInput"
+        placeholder="Enter password"
+        formControlName="password"
+        [ngClass]="{ 'is-invalid': password?.touched && password?.invalid }"
+        style="padding: .85rem 1rem;" />
+        
+      @if(password?.errors?.['required'])
+      {
+        <span class="text-danger">Password is required</span>
+      }
+      
+      @if(password?.errors?.['minLength'])
+      {
+        <span class="text-danger">At least 8 characters required</span>
+      }
+    </div>
+  
+    <button
+      type="submit"
+      class="border-0 login mb-3 col-lg-4 col-md-4 col-sm-4 m-auto"
+      style="background-color: #f68b1e; border-radius: 5px; padding: .85rem 1rem;"
+      [disabled]="formGroup.invalid">Signup</button>
+      <h1 class="text-center">JUMIA <img src="myjumia-top-logo.png" alt="Jumia" width="15px" height="15px"/></h1> 
+  </form>
+  
+  

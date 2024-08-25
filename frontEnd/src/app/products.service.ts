@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { IProduct } from './iproduct';
 import { CartService } from './cartservice.service';
+import { IProductResponse } from './iproduct-response';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,8 @@ export class ProductsService {
   products$ = this.productsSubject.asObservable();
   // Get products with pagination support
   // Get products with pagination support
-getData(page: number, limit: number): Observable<any> {
-  return this._HttpClient.get<any>(`http://localhost:5000/api/v1/ng/products?page=${page}&limit=${limit}`);
+getData(page: number): Observable<any> {//pages
+  return this._HttpClient.get<any>(`http://localhost:5000/api/v1/ng/products?page=${page}&limit=10`);
 }
 
   // Get product details by ID
@@ -26,8 +27,8 @@ getData(page: number, limit: number): Observable<any> {
   }
 // Add this method to your ProductsService
 searchProducts(query: string) {
-  return this._HttpClient.get<IProduct[]>(
-    `http://localhost:5000/api/v1/ng/products?search=${query}`
+  return this._HttpClient.get<any>(
+    `http://localhost:5000/api/v1/ng/products/searchByName?productName=${query}`
   );
 }
 
