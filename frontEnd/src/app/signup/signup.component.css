@@ -1,8 +1,8 @@
-div ::before{
+form-group ::before{
     border: none;
     }
     
-    div input:focus {
+    form-group input:focus {
         border: 2px solid #f8982d;
     }
     .login{

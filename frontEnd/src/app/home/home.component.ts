@@ -440,7 +440,7 @@ export class HomeComponent implements OnInit {
 
   // Pagination properties
   currentPage: number = 1;
-  itemsPerPage: number = 5;
+  itemsPerPage: number = 10;
   totalPages: number = 1;
 
   constructor(
@@ -454,19 +454,16 @@ export class HomeComponent implements OnInit {
   }
 
   // Load products based on the current page and items per page
-  loadProducts(): void {
-    this._productsService.getData(this.currentPage, this.itemsPerPage).subscribe((response) => {
+  loadProducts(): void {//delete limit
+    this._productsService.getData(this.currentPage).subscribe((response) => {
       this.products = response.data;
       this.filteredProducts = this.products;
 
-      // Extract unique categories and brands for filtering options
       this.categories = [...new Set(this.products.map((product) => product.category))];
       this.brands = [...new Set(this.products.map((product) => product.brand))];
-
-      // Handle pagination response (total pages)
-      this.totalPages = response.totalPages;
-
-      // Update pagination
+      
+      this.totalPages = response.pages;
+    
       this.updatePagination();
     });
   }

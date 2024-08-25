@@ -6,13 +6,13 @@ import { CommonModule } from '@angular/common';
 import { IUser } from '../models/Iuser';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   standalone: true,
   imports: [ReactiveFormsModule,CommonModule],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+ templateUrl: './signup.component.html',
+  styleUrl: './signup.component.css'
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
   formData:  IUser = {} as IUser;
   http = inject(HttpClient);
   formGroup:FormGroup = new FormGroup({});
@@ -27,15 +27,31 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
-      ])
+      ]),
+      fullName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      age: new FormControl('', [
+        Validators.required,
+        Validators.min(1),
+      ]),
+      gender: new FormControl('', [
+        Validators.required,
+        // Validators.min(1),
+      ]),
+      address: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+      ]),
     });
   }
 
-  addUser() {
+  addNewUser() {
     if (this.formGroup.valid) {
       const formData = this.formGroup.value;
       console.log('Form data:', formData); // Log the data being sent
-      this.authServ.logInUser(formData);
+      this.authServ.signUpUser(formData);
     }
   }
 
@@ -46,4 +62,17 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.formGroup.get('password');
   }
+  get fullName() {
+    return this.formGroup.get('fullName');
+  }
+  get age() {
+    return this.formGroup.get('age');
+  }
+  get gender() {
+    return this.formGroup.get('gender');
+  }
+  get address() {
+    return this.formGroup.get('address');
+  }
 }
+
