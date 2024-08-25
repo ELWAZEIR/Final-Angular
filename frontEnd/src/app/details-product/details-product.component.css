@@ -1,0 +1,15 @@
+.product-image {
+    max-width: 50%; /* Adjust the width to make the image smaller */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .custom-button {
+    background-color: rgb(255, 193, 7);
+    border-color: rgb(255, 193, 7);
+  }
+  
+  .custom-button:hover {
+    background-color: rgb(255, 182, 6); /* Optional: Darker shade on hover */
+    border-color: rgb(255, 182, 6);
+  }
+  

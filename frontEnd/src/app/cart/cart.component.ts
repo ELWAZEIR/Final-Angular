@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { CartService } from '../cartservice.service'; // استيراد CartService
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
-
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -55,7 +56,23 @@ export class CartComponent {
   }
 
   handleRemoveItem(id: number) {
-    this.cartService.removeFromCart(id);
+    Toastify({
+      text: "Are you sure you want to remove this item?",
+      duration: 5000,
+      destination: "#",
+      newWindow: true,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "center", // `left`, `center` or `right`
+      backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      onClick: () => {
+        // Handle the user's response
+        if (confirm("Do you really want to remove this item?")) {
+          this.cartService.removeFromCart(id);
+        }
+      }
+    }).showToast();
   }
 }
 

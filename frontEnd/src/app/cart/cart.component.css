@@ -183,9 +183,6 @@ button.btn-outline-secondary {
   border-color: #ddd;
 }
 
-button.btn-outline-danger {
-  color: #d9534f; /* Red for delete button */
-}
 
 button.btn-warning {
   color: #fff; /* White text on checkout button */
