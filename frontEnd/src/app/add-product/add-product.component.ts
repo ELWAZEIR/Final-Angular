@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import Joi from 'joi';
 import {
   FormBuilder,
   FormGroup,
@@ -47,14 +46,33 @@ export class AddProductComponent implements OnInit {
     private router: Router
   ) {
     this.productForm = this.fb.group({
-      productName: new FormControl('', [Validators.required]),
+      productName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(8),
+      ]),
       price: new FormControl('', [Validators.required]),
-      category: new FormControl('', [Validators.required]),
+      category: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(8),
+      ]),
       photo: new FormControl(null, [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      brand: new FormControl('', [Validators.required]),
+      description: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(8),
+      ]),
+      brand: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(8),
+      ]),
     });
   }
+
+
+  
 
   ngOnInit(): void {
     this.loadProducts();
@@ -90,58 +108,38 @@ export class AddProductComponent implements OnInit {
 
   onSubmit(): void {
     const formValue = this.productForm.value;
+      console.log(this.productForm);
 
-    // Define Joi schema
-    const productSchema = Joi.object({
-      productName: Joi.string().min(3).max(50).required(),
-      price: Joi.number().min(0).required(),
-      category: Joi.string().required(),
-      brand: Joi.string().required(),
-      description: Joi.string().min(5).max(500).required(),
-    });
-
-    // Validate using Joi
-    const { error } = productSchema.validate(formValue, { abortEarly: false });
-
-    if (error) {
-      this.errorMessages = {}; // Clear previous errors
-      error.details.forEach(err => {
-        const control = this.productForm.get(err.path.join('.'));
-        if (control) {
-          control.setErrors({ customError: err.message });
-        }
-        // Map errors to display messages
-        this.errorMessages[err.path.join('.')] = err.message;
-      });
-    } else {
-      this.errorMessages = {};
-
-      const formData = new FormData();
-      formData.append('productName', this.productForm.get('productName')?.value);
-      formData.append('price', this.productForm.get('price')?.value);
-      formData.append('category', this.productForm.get('category')?.value);
-      formData.append('description', this.productForm.get('description')?.value);
-      formData.append('brand', this.productForm.get('brand')?.value);
-
-      const fileControl = this.productForm.get('photo')?.value;
-      if (fileControl && fileControl instanceof File) {
-        formData.append('photo', fileControl);
-      }
-
-      const productId = this.productId ? this.productId : Date.now().toString();
-
-      if (this.isUpdateMode) {
-        this.adminService.updateProduct(formData, productId).subscribe(() => {
-          this.loadProducts();
-          this.router.navigate(['/home']);
-        });
-      } else {
-        this.adminService.addProduct(formData).subscribe(() => {
-          this.loadProducts();
-          this.router.navigate(['/home']);
-        });
-      }
+    if(this.productForm.invalid){
+      this.productForm.markAllAsTouched()
+      console.log('dirty')
     }
+
+     const formData = new FormData();
+     formData.append('productName', this.productForm.get('productName')?.value);
+     formData.append('price', this.productForm.get('price')?.value);
+     formData.append('category', this.productForm.get('category')?.value);
+     formData.append('description', this.productForm.get('description')?.value);
+     formData.append('brand', this.productForm.get('brand')?.value);
+
+     const fileControl = this.productForm.get('photo')?.value;
+     if (fileControl && fileControl instanceof File) {
+       formData.append('photo', fileControl);
+     }
+
+     const productId = this.productId ? this.productId : Date.now().toString();
+
+     if (this.isUpdateMode) {
+       this.adminService.updateProduct(formData, productId).subscribe(() => {
+         this.loadProducts();
+         this.router.navigate(['/home']);
+       });
+     } else {
+       this.adminService.addProduct(formData).subscribe(() => {
+         this.loadProducts();
+         this.router.navigate(['/home']);
+       });
+     }
   }
 
   deleteProduct(id: object): void {

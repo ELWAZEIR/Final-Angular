@@ -1,7 +1,6 @@
 <div class="w-75 m-auto py-4">
   <form class="mt-5" [formGroup]="productForm" (ngSubmit)="onSubmit()">
-
-<!-- ================== -->
+    <!-- ================== -->
     <label class="mt-3" for="ProductName">Product title</label>
     <input
       type="text"
@@ -10,9 +9,22 @@
       formControlName="productName"
       placeholder="Enter Product title"
     />
-    @if(errorMessages['productName'] ){ <div  class="text-danger">
-      <h1>{{ errorMessages['productName'] }}</h1>
-    </div>}
+    @if(productForm.get('productName')?.errors &&
+    productForm.get('productName')?.touched){
+    @if(productForm.get('productName')?.errors?.['required']){
+           <p class="text-danger">productName is req</p>
+
+    } 
+@else if(productForm.get('productName')?.errors?.['minlength']){
+        <p class="text-danger">productName is min Lenth is 3</p>
+}
+
+@else if(productForm.get('productName')?.errors?.['minlength']){
+        <p class="text-danger">productName is max Lenth is 8</p>
+}
+
+  }
+  
     <label for="Productprice">Product price</label>
     <input
       type="number"
@@ -22,11 +34,12 @@
       placeholder="Enter Product price"
     />
 
-    @if(errorMessages['price']){ <div class="text-danger">
-      <h1>{{ errorMessages['price'] }}</h1>
-    </div>}
-   
-  
+    @if(errorMessages['price']){
+    <div class="text-danger">
+      <h1>{{ errorMessages["price"] }}</h1>
+    </div>
+    }
+
     <label for="ProductBrand">Product Brand</label>
     <input
       type="text"
@@ -35,11 +48,22 @@
       formControlName="brand"
       placeholder="Enter Product brand"
     />
-    @if(errorMessages['brand']){<div class="text-danger">
-      <h1>{{ errorMessages['brand'] }}</h1>
-    </div>}
-    
-  
+       @if(productForm.get('brand')?.errors &&
+    productForm.get('brand')?.touched){
+    @if(productForm.get('brand')?.errors?.['required']){
+           <p class="text-danger">brand is req</p>
+
+    } 
+@else if(productForm.get('brand')?.errors?.['minlength']){
+        <p class="text-danger">brand is min Lenth is 3</p>
+}
+
+@else if(productForm.get('brand')?.errors?.['minlength']){
+        <p class="text-danger">brand is max Lenth is 8</p>
+}
+
+  }
+
     <label for="ProductDesc">Product description</label>
     <textarea
       class="form-control my-3"
@@ -47,11 +71,23 @@
       formControlName="description"
       placeholder="Enter Product description"
     ></textarea>
-    @if(errorMessages['description']){<div class="text-danger">
-      <h1>{{ errorMessages['description'] }}</h1>
-    </div>}
-    
-<!-- ================== -->
+          @if(productForm.get('description')?.errors &&
+    productForm.get('description')?.touched){
+    @if(productForm.get('description')?.errors?.['required']){
+           <p class="text-danger">description is req</p>
+
+    } 
+@else if(productForm.get('description')?.errors?.['minlength']){
+        <p class="text-danger">description is min Lenth is 3</p>
+}
+
+@else if(productForm.get('description')?.errors?.['minlength']){
+        <p class="text-danger">description is max Lenth is 8</p>
+}
+
+  }
+
+    <!-- ================== -->
 
     <label for="ProductCategory">Product Category</label>
     <select
@@ -59,11 +95,26 @@
       id="ProductCategory"
       formControlName="category"
     >
+  
       @for(category of categories;track $index){
       <option>{{ category }}</option>
       }
     </select>
+              <!-- @if(productForm.get('category')?.errors &&
+    productForm.get('category')?.touched){
+    @if(productForm.get('category')?.errors?.['required']){
+           <p class="text-danger">category is req</p>
 
+    } 
+@else if(productForm.get('category')?.errors?.['minlength']){
+        <p class="text-danger">category is min Lenth is 3</p>
+}
+
+@else if(productForm.get('category')?.errors?.['minlength']){
+        <p class="text-danger">category is max Lenth is 8</p>
+}
+
+  } -->
 
     <label for="ProductImage">Product image</label>
     <input
@@ -73,13 +124,12 @@
       (change)="onFileSelected($event)"
     />
 
-   
-
     <button class="btn btn-info" id="mainbtn">
-      {{ isUpdateMode ? 'Update' : 'Add' }}
+      {{ isUpdateMode ? "Update" : "Add" }}
     </button>
   </form>
 
+  <!-- جدول عرض المنتجات -->
   <table class="table table-striped mt-5">
     <thead>
       <tr>
@@ -87,6 +137,7 @@
         <th>Price</th>
         <th>Category</th>
         <th>Brand</th>
+        <!-- إضافة عمود العلامة التجارية في الجدول -->
         <th>Actions</th>
       </tr>
     </thead>
@@ -99,7 +150,8 @@
         <td>{{ product.productName }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.category }}</td>
-        <td>{{ product.brand}}</td>
+        <td>{{ product.brand }}</td>
+        <!-- عرض العلامة التجارية في الجدول -->
         <td>
           <button class="btn btn-warning btn-sm" (click)="editProduct(product)">
             Update
@@ -116,7 +168,8 @@
     </tbody>
   </table>
 
+  <!-- رسالة عند عدم وجود منتجات -->
   @if(products.length === 0){
   <p>No products available.</p>
-  }
+    }
 </div>
