@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../products.service';
 import { FormsModule } from '@angular/forms';
+import { IProduct } from '../iproduct';
 
 @Component({
   selector: 'app-details-product',
@@ -15,6 +16,7 @@ export class DetailsProductComponent implements OnInit {
   productDetails: any; // يمكنك استخدام نوع أكثر تحديدًا بدلاً من any
 
   constructor(
+    private _productsService: ProductsService,
     private activatedRoute: ActivatedRoute, // تعديل التسمية إلى snake_case
     private productsService: ProductsService // تعديل التسمية إلى camelCase
   ) {}
@@ -27,5 +29,8 @@ export class DetailsProductComponent implements OnInit {
       this.productDetails = product.data.product;
       console.log(this.productDetails.data.product); // يجب أن يكون هنا بعد الحصول على البيانات
     });
+  }
+  addToCart(product: IProduct) {
+    this._productsService.addToCart(product);
   }
 }
